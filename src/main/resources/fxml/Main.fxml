@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ru.ssau.metrology.MainController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="337.0"
+            prefWidth="366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ru.ssau.metrology.controllers.MainController">
+   <children>
+      <Label layoutX="32.0" layoutY="45.0" text="Режим ввода" textFill="#1c2675" AnchorPane.leftAnchor="32.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="manualMode" layoutX="150.0" layoutY="61.0" mnemonicParsing="false" text="Ручной"
+                   textFill="#1c2675" AnchorPane.leftAnchor="150.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="automaticMode" layoutX="150.0" layoutY="29.0" mnemonicParsing="false" text="Автоматический"
+                   textFill="#1c2675" AnchorPane.topAnchor="29.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="28.0" layoutY="139.0" text="Диапазон распределения" textFill="#1c2675" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="139.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="219.0" text="Закон распределения" textFill="#1c2675" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="219.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rangeToInput" layoutX="227.0" layoutY="175.0" prefHeight="25.0" prefWidth="114.0"
+                 AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="175.0"/>
+      <Label layoutX="28.0" layoutY="176.0" text="от" textFill="#1c2675" AnchorPane.leftAnchor="28.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rangeFromInput" layoutX="69.0" layoutY="175.0" prefHeight="25.0" prefWidth="114.0"
+                 AnchorPane.leftAnchor="69.0"/>
+      <Label layoutX="196.0" layoutY="175.0" text="до" textFill="#1c2675" AnchorPane.leftAnchor="196.0" AnchorPane.topAnchor="175.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="distributionsComboBox" layoutX="199.0" layoutY="218.0" prefHeight="25.0" prefWidth="142.0"
+                AnchorPane.leftAnchor="199.0" AnchorPane.topAnchor="218.0"/>
+      <Label layoutX="28.0" layoutY="102.0" text="Количество значений" textFill="#1c2675" AnchorPane.leftAnchor="28.0" AnchorPane.topAnchor="102.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <Button layoutX="121.0" layoutY="259.0" mnemonicParsing="false" onAction="#onCalculateAction" prefHeight="50.0"
+              prefWidth="127.0" text="Рассчитать" textFill="#1c2675" AnchorPane.leftAnchor="121.0"
+              AnchorPane.topAnchor="259.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Button>
+      <TextField fx:id="valuesCountInput" layoutX="227.0" layoutY="100.0" prefHeight="25.0" prefWidth="114.0"
+                 AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="100.0"/>
+   </children>
 </AnchorPane>
