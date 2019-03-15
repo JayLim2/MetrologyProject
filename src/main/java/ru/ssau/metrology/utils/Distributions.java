@@ -75,7 +75,11 @@ public class Distributions {
 
     // TODO: 15.03.2019 release method
     private static double getNormalDistributionValue(double x) {
-        return 0;
+        return getNormalDistributionValue(x, 1, 0);
+    }
+
+    private static double getNormalDistributionValue(double x, double sigma, double avg) {
+        return (1F / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp((-1) * ((x - avg) * (x - avg)) / (2 * sigma * sigma));
     }
 
     // TODO: 15.03.2019 release method
