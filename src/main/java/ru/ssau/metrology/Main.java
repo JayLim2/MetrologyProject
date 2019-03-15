@@ -6,9 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main  extends Application {
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Main.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/fxml/Main.fxml"));
         primaryStage.setTitle("Метрология");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
