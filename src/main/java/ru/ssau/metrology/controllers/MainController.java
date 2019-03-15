@@ -8,6 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import ru.ssau.metrology.models.Distribution;
+import ru.ssau.metrology.utils.Forms;
 
 import java.util.Arrays;
 
@@ -38,6 +39,10 @@ public class MainController {
     }
 
     public void onCalculateAction() {
-        //вызов следующей формы
+        try {
+            Forms.getForm("AutoCalculationsResult", "Рассчитать в автоматическом режиме").showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
