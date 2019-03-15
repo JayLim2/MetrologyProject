@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="331.0"
+            prefWidth="648.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="29.0" layoutY="25.0" text="Критерий распределения" textFill="#1c2675"
+               AnchorPane.leftAnchor="29.0">
+            <font>
+                <Font name="BloggerSans-Medium" size="17.0"/>
+            </font>
+        </Label>
+        <ComboBox layoutX="238.0" layoutY="24.0" prefHeight="25.0" prefWidth="138.0" AnchorPane.topAnchor="24.0"/>
+        <TableView layoutX="32.0" layoutY="71.0" prefHeight="218.0" prefWidth="279.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="C1"/>
+                <TableColumn prefWidth="75.0" text="C2"/>
+            </columns>
+        </TableView>
+        <AreaChart layoutX="324.0" layoutY="71.0" prefHeight="218.0" prefWidth="311.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT"/>
+            </yAxis>
+        </AreaChart>
+    </children>
+</AnchorPane>
