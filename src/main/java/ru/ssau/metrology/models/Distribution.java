@@ -2,7 +2,8 @@ package ru.ssau.metrology.models;
 
 public enum Distribution {
     NORMAL("Нормальное"),
-    UNIFORM("Равномерное");
+    TRIANGULAR("Треугольное");
+    //UNIFORM("Равномерное");
 
     private String name;
 
