@@ -3,16 +3,16 @@ package ru.ssau.metrology.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import ru.ssau.metrology.models.Distribution;
+import ru.ssau.metrology.models.Validator;
 import ru.ssau.metrology.utils.Forms;
 
 import java.util.Arrays;
 
 public class MainController {
+
+    private Validator validator;
 
     @FXML
     private RadioButton manualMode;
@@ -39,10 +39,19 @@ public class MainController {
     }
 
     public void onCalculateAction() {
-        try {
-            Forms.getForm("AutoCalculationsResult", "Рассчитать в автоматическом режиме").showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(validator.checkFieldCountInputValues(valuesCountInput.getText())){
+            int coutnInputValues = Integer.parseInt(valuesCountInput.getText());
+            if((validator.checkRange(rangeFromInput.getText()))&&(validator.checkRange(rangeToInput.getText()))){
+                double rangeFromInputDouble = Double.parseDouble(rangeFromInput.getText());
+                double rangeToInputDouble = Double.parseDouble(rangeToInput.getText());
+
+                //Далее переходим на форму и передаём в её контроллер все полученные значения, ну или подсчитать что то.
+                try {
+                    Forms.getForm("AutoCalculationsResult", "Рассчитать в автоматическом режиме").showAndWait();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
