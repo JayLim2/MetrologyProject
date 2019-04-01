@@ -1,12 +1,12 @@
 package ru.ssau.metrology.models;
 
-public class toTable{
+public class toTable {
     private double point;
     private String allow;
 
     public toTable(double point) {
         this.point = point;
-        this.allow="не определено";
+        this.allow = "не определено";
     }
 
     public double getPoint() {
