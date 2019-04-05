@@ -50,17 +50,20 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
-      <RadioButton fx:id="sigmMetod" layoutX="18.0" layoutY="327.0" mnemonicParsing="false" text="3 сигмы" textFill="#1c2675">
+      <fx:define>
+         <ToggleGroup fx:id="methodToggleGroup"/>
+      </fx:define>
+      <RadioButton fx:id="sigmMetod" toggleGroup="$methodToggleGroup" layoutX="18.0" layoutY="327.0" mnemonicParsing="false" text="3 сигмы" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="romanovMetod" layoutX="19.0" layoutY="358.0" mnemonicParsing="false" text="Романовского с параметром:" textFill="#1c2675">
+      <RadioButton fx:id="romanovMetod" toggleGroup="$methodToggleGroup" layoutX="19.0" layoutY="358.0" mnemonicParsing="false" text="Романовского с параметром:" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="shevineMetod" layoutX="20.0" layoutY="390.0" mnemonicParsing="false" text="Шевине" textFill="#1c2675">
+      <RadioButton fx:id="shevineMetod" toggleGroup="$methodToggleGroup" layoutX="20.0" layoutY="390.0" mnemonicParsing="false" text="Шевине" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
