@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.metrology.controllers.MainController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.metrology.controllers.MainController">
    <children>
       <Label layoutX="18.0" layoutY="20.0" text="Генерация:" textFill="#1c2675">
          <font>
@@ -46,13 +47,13 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Button>
-      <Button layoutX="155.0" layoutY="250.0" mnemonicParsing="false" onAction="#toAdd" prefHeight="26.0" prefWidth="204.0" text="Добавить значение" textFill="#1c2675">
+      <Button layoutX="155.0" layoutY="250.0" mnemonicParsing="false" onAction="#addPoint" prefHeight="26.0" prefWidth="204.0" text="Добавить значение" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Button>
       <TextField fx:id="addText" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="114.0" />
-      <Button layoutX="19.0" layoutY="421.0" mnemonicParsing="false" onAction="#onWork" prefHeight="50.0" prefWidth="127.0" text="Рассчитать" textFill="#1c2675">
+      <Button layoutX="19.0" layoutY="421.0" mnemonicParsing="false" onAction="#validatePoints" prefHeight="50.0" prefWidth="127.0" text="Рассчитать" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
@@ -65,39 +66,37 @@
       <fx:define>
          <ToggleGroup fx:id="methodToggleGroup"/>
       </fx:define>
-      <RadioButton fx:id="sigmMetod" toggleGroup="$methodToggleGroup" layoutX="18.0" layoutY="327.0" mnemonicParsing="false" text="3 сигмы" textFill="#1c2675">
+      <RadioButton fx:id="radioSigmaCriteria" selected="true" toggleGroup="$methodToggleGroup" layoutX="18.0" layoutY="327.0" mnemonicParsing="false" text="3 сигмы" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="romanovMetod" toggleGroup="$methodToggleGroup" layoutX="19.0" layoutY="358.0" mnemonicParsing="false" text="Романовского с параметром:" textFill="#1c2675">
+      <RadioButton fx:id="radioRomanovCriteria" toggleGroup="$methodToggleGroup" layoutX="19.0" layoutY="358.0" mnemonicParsing="false" text="Романовского с параметром:" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </RadioButton>
-      <TextField fx:id="romanovParametr" layoutX="289.0" layoutY="359.0" prefHeight="25.0" prefWidth="70.0" text="0.01" />
-      <RadioButton fx:id="shevineMetod" toggleGroup="$methodToggleGroup" layoutX="20.0" layoutY="390.0" mnemonicParsing="false" text="Шевине" textFill="#1c2675">
+      <ComboBox fx:id="comboRomanovRate" layoutX="289.0" layoutY="359.0" prefHeight="25.0" prefWidth="70.0" />
+      <RadioButton fx:id="radioChauvenetCriteria" toggleGroup="$methodToggleGroup" layoutX="20.0" layoutY="390.0" mnemonicParsing="false" text="Шевине" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </RadioButton>
-      <TextArea fx:id="textArea" layoutX="376.0" layoutY="33.0" prefHeight="385.0" prefWidth="161.0" />
-      <TextArea fx:id="textAreaAllow" layoutX="537.0" layoutY="34.0" prefHeight="385.0" prefWidth="151.0" />
-      <Label layoutX="376.0" layoutY="7.0" text="Точки" textFill="#1c2675">
+      <Label layoutX="520.0" layoutY="7.0" text="Точки" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
-      <TableView fx:id="tableOfValues" layoutX="721.0" layoutY="34.0" prefHeight="385.0" prefWidth="286.0">
+      <TableView fx:id="tableOfPoints" layoutX="400.0" layoutY="43.0" prefHeight="385.0" prefWidth="286.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Значение">
              <cellValueFactory>
-                <PropertyValueFactory property="value"/>
+                <PropertyValueFactory property="value" />
              </cellValueFactory>
           </TableColumn>
           <TableColumn prefWidth="75.0" text="Статус">
              <cellValueFactory>
-                <PropertyValueFactory property="verified"/>
+                <PropertyValueFactory property="verified" />
              </cellValueFactory>
           </TableColumn>
         </columns>
