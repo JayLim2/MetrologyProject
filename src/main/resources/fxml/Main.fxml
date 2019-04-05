@@ -5,21 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.metrology.controllers.MainController">
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.ssau.metrology.controllers.MainController">
    <children>
-      <Label layoutX="20.0" layoutY="98.0" text="Диапазон распределения" textFill="#1c2675" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0">
-         <font>
-            <Font name="BloggerSans-Medium" size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="rangeToInput" layoutX="219.0" layoutY="134.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="134.0" />
-      <Label layoutX="20.0" layoutY="135.0" text="от" textFill="#1c2675" AnchorPane.leftAnchor="20.0">
-         <font>
-            <Font name="BloggerSans-Medium" size="17.0" />
-         </font>
-      </Label>
-      <TextField fx:id="rangeFromInput" layoutX="61.0" layoutY="134.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="61.0" />
-      <Label layoutX="188.0" layoutY="134.0" text="до" textFill="#1c2675" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="134.0">
+      <Label layoutX="18.0" layoutY="20.0" text="Генерация:" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
@@ -29,17 +18,40 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
-      <Button layoutX="18.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCalculateAction" prefHeight="50.0" prefWidth="239.0" text="Сгенерировать значения" textFill="#1c2675" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="185.0">
-         <font>
-            <Font name="BloggerSans-Medium" size="17.0" />
-         </font>
-      </Button>
       <TextField fx:id="valuesCountInput" layoutX="219.0" layoutY="59.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="59.0" />
-      <Label layoutX="18.0" layoutY="20.0" text="Генерация:" textFill="#1c2675">
+      <Label layoutX="20.0" layoutY="98.0" text="Диапазон распределения" textFill="#1c2675" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="98.0">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
+      <TextField fx:id="rangeToInput" layoutX="219.0" layoutY="136.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="136.0" />
+      <Label layoutX="20.0" layoutY="135.0" text="от" textFill="#1c2675" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rangeFromInput" layoutX="56.0" layoutY="136.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="136.0" />
+      <Label layoutX="188.0" layoutY="135.0" text="до" textFill="#1c2675" AnchorPane.leftAnchor="186.0" AnchorPane.topAnchor="134.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Label>
+      <Button layoutX="18.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCalculateAction" prefHeight="50.0" prefWidth="231.0" text="Сгенерировать значения" textFill="#1c2675" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="185.0">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Button>
+      <Button layoutX="260.0" layoutY="185.0" mnemonicParsing="false" onAction="#clear" prefHeight="50.0" prefWidth="100.0" text="Очистить" textFill="#1c2675">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Button>
+      <Button layoutX="155.0" layoutY="250.0" mnemonicParsing="false" onAction="#toAdd" prefHeight="26.0" prefWidth="204.0" text="Добавить значение" textFill="#1c2675">
+         <font>
+            <Font name="BloggerSans-Medium" size="17.0" />
+         </font>
+      </Button>
+      <TextField fx:id="addText" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="114.0" />
       <Button layoutX="19.0" layoutY="421.0" mnemonicParsing="false" onAction="#onWork" prefHeight="50.0" prefWidth="127.0" text="Рассчитать" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
@@ -63,6 +75,7 @@
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
          </font>
       </RadioButton>
+      <TextField fx:id="romanovParametr" layoutX="289.0" layoutY="359.0" prefHeight="25.0" prefWidth="70.0" text="0.01" />
       <RadioButton fx:id="shevineMetod" toggleGroup="$methodToggleGroup" layoutX="20.0" layoutY="390.0" mnemonicParsing="false" text="Шевине" textFill="#1c2675">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="17.0" />
@@ -75,17 +88,22 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="addText" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="114.0" />
-      <Button layoutX="155.0" layoutY="250.0" mnemonicParsing="false" onAction="#toAdd" prefHeight="26.0" prefWidth="204.0" text="Добавить значение" textFill="#1c2675">
-         <font>
-            <Font name="BloggerSans-Medium" size="17.0" />
-         </font>
-      </Button>
-      <TextField fx:id="romanovParametr" layoutX="289.0" layoutY="359.0" prefHeight="25.0" prefWidth="70.0" text="0.01" />
-      <Button layoutX="273.0" layoutY="185.0" mnemonicParsing="false" onAction="#clear" prefHeight="50.0" prefWidth="87.0" text="X" textFill="#1c2675">
-         <font>
-            <Font name="BloggerSans-Medium" size="17.0" />
-         </font>
-      </Button>
+      <TableView fx:id="tableOfValues" layoutX="721.0" layoutY="34.0" prefHeight="385.0" prefWidth="286.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Значение">
+             <cellValueFactory>
+                <PropertyValueFactory property="value"/>
+             </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="75.0" text="Статус">
+             <cellValueFactory>
+                <PropertyValueFactory property="verified"/>
+             </cellValueFactory>
+          </TableColumn>
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </AnchorPane>

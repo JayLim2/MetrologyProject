@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import ru.ssau.metrology.models.Distribution;
 import ru.ssau.metrology.models.Validator;
 import ru.ssau.metrology.models.toTable;
+import ru.ssau.metrology.view.TablePoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class MainController {
     public RadioButton shevineMetod;
     public TextField addText;
     public TextField romanovParametr;
+    public TableView<TablePoint> tableOfValues;
     private Validator validator;
 
     @FXML
