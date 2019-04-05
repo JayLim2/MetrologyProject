@@ -25,7 +25,6 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="rangeToInput" layoutX="219.0" layoutY="136.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="136.0" />
       <Label layoutX="20.0" layoutY="135.0" text="от" textFill="#1c2675" AnchorPane.leftAnchor="20.0">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
@@ -37,6 +36,7 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Label>
+      <TextField fx:id="rangeToInput" layoutX="219.0" layoutY="136.0" prefHeight="25.0" prefWidth="114.0" AnchorPane.leftAnchor="219.0" AnchorPane.topAnchor="136.0" />
       <Button layoutX="18.0" layoutY="185.0" mnemonicParsing="false" onAction="#onCalculateAction" prefHeight="50.0" prefWidth="231.0" text="Сгенерировать значения" textFill="#1c2675" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="185.0">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
@@ -47,12 +47,12 @@
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Button>
+      <TextField fx:id="addText" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="114.0" />
       <Button layoutX="155.0" layoutY="250.0" mnemonicParsing="false" onAction="#addPoint" prefHeight="26.0" prefWidth="204.0" text="Добавить значение" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
          </font>
       </Button>
-      <TextField fx:id="addText" layoutX="26.0" layoutY="256.0" prefHeight="25.0" prefWidth="114.0" />
       <Button layoutX="19.0" layoutY="421.0" mnemonicParsing="false" onAction="#validatePoints" prefHeight="50.0" prefWidth="127.0" text="Рассчитать" textFill="#1c2675">
          <font>
             <Font name="BloggerSans-Medium" size="17.0" />
