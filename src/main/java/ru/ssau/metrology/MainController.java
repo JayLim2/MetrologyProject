@@ -189,7 +189,7 @@ public class MainController {
     private double getRomanovTableValue(double rate, int count) {
         double value = 0;
         //Тут я не уверена что в проверке именно меньше, потому что в таблице там равно именно, но тогда мы тип не то количество от пользователя отбарсываем или что?
-        if (rate == 1) {
+        if (rate == 0.01) {
             if (count < 4) {
                 value = romanovTable[0][0];
             } else if (count < 6) {
@@ -205,7 +205,7 @@ public class MainController {
             } else {
                 value = romanovTable[6][0];
             }
-        } else if (rate == 2) {
+        } else if (rate == 0.02) {
             if (count < 4) {
                 value = romanovTable[0][1];
             } else if (count < 6) {
@@ -221,7 +221,7 @@ public class MainController {
             } else {
                 value = romanovTable[6][1];
             }
-        } else if (rate == 5) {
+        } else if (rate == 0.05) {
             if (count < 4) {
                 value = romanovTable[0][2];
             } else if (count < 6) {
@@ -237,7 +237,7 @@ public class MainController {
             } else {
                 value = romanovTable[6][2];
             }
-        } else if (rate == 10) {
+        } else if (rate == 0.1) {
             if (count < 4) {
                 value = romanovTable[0][3];
             } else if (count < 6) {
