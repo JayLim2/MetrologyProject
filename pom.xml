@@ -6,7 +6,7 @@
 
     <groupId>ru.ssau</groupId>
     <artifactId>MetrologyProject</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <organization><name>SSAU</name></organization>
 
     <properties>
@@ -31,6 +31,10 @@
                 <configuration>
                     <mainClass>ru.ssau.metrology.Main</mainClass>
                     <bundler>exe</bundler>
+                    <appName>${project.artifactId}</appName>
+                    <nativeReleaseVersion>${project.version}</nativeReleaseVersion>
+                    <needShortcut>true</needShortcut>
+                    <needMenu>true</needMenu>
                 </configuration>
                 <executions>
                     <!-- required before build-native -->
