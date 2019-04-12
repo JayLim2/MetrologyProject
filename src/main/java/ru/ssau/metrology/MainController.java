@@ -1,19 +1,17 @@
-package ru.ssau.metrology.controllers;
+package ru.ssau.metrology;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import ru.ssau.metrology.models.Distribution;
-import ru.ssau.metrology.models.Validator;
-import ru.ssau.metrology.view.TablePoint;
+import javafx.beans.property.BooleanProperty;
+import javafx.scene.control.*;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import org.apache.commons.math3.stat.inference.TestUtils;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class MainController {
+    private static Random random = new Random();
     private static final Double[] ROMANOV_RATE = {0.01, 0.02, 0.05, 0.10};
     private static final double[][] romanovTable = {
             {1.73, 1.72, 1.71, 1.69},
@@ -24,53 +22,84 @@ public class MainController {
             {2.90, 2.80, 2.64, 2.49},
             {3.08, 2.96, 2.78, 2.62}
     };
+    public TextField fieldValuesCount;
+    public RadioButton radioRangeMethod;
+    public TextField fieldRangeFrom;
+    public TextField fieldRangeTo;
+    public RadioButton radioParamsMethod;
+    public TextField fieldMX;
+    public TextField fieldDX;
+    public TextField fieldAddText;
+    public RadioButton radioSigmaCriteria;
+    public RadioButton radioRomanovCriteria;
+    public ComboBox<Double> comboRomanovRate;
+    public RadioButton radioChauvenetCriteria;
+    public TableView<TablePoint> tableOfPoints;
+    public Label tCriteria;
+    public CheckBox checkInnerRange;
+    public TextField fieldInnerRangeFrom;
+    public TextField fieldInnerRangeTo;
+    private double lastMXValue = 0.0D;
 
     private enum Criteria {
         NONE, SIGMA, ROMANOV, CHAUVENET
-
     }
 
-    public RadioButton radioSigmaCriteria;
-    public RadioButton radioRomanovCriteria;
-    public RadioButton radioChauvenetCriteria;
-    public TextField addText;
-    public ComboBox<Double> comboRomanovRate;
-    public TableView<TablePoint> tableOfPoints;
-    private Validator validator;
-
-    @FXML
-    private TextField valuesCountInput;
-    @FXML
-    private TextField rangeFromInput;
-    @FXML
-    private TextField rangeToInput;
-    @FXML
-    private ComboBox<Distribution> distributionsComboBox;
 
     public void initialize() {
+        DoubleStringConverter converter = new DoubleStringConverter();
+        fieldValuesCount.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
+        textFieldInit(radioRangeMethod.selectedProperty(), fieldRangeFrom, converter);
+        textFieldInit(radioRangeMethod.selectedProperty(), fieldRangeTo, converter);
+        textFieldInit(radioParamsMethod.selectedProperty(), fieldMX, converter);
+        textFieldInit(radioParamsMethod.selectedProperty(), fieldDX, converter);
+        textFieldInit(checkInnerRange.selectedProperty(), fieldInnerRangeFrom, converter);
+        textFieldInit(checkInnerRange.selectedProperty(), fieldInnerRangeTo, converter);
+
+        fieldInnerRangeFrom.disableProperty().bind(checkInnerRange.selectedProperty().not());
+        fieldInnerRangeFrom.setTextFormatter(new TextFormatter<>(converter));
+
+        fieldInnerRangeTo.disableProperty().bind(checkInnerRange.selectedProperty().not());
+        fieldInnerRangeTo.setTextFormatter(new TextFormatter<>(converter));
+
+        comboRomanovRate.disableProperty().bind(radioRomanovCriteria.selectedProperty().not());
         comboRomanovRate.getItems().addAll(Arrays.asList(ROMANOV_RATE));
         comboRomanovRate.getSelectionModel().selectFirst();
-//        ObservableList<Distribution> distributions = FXCollections.observableList(Arrays.asList(Distribution.values()));
-        //       distributionsComboBox.setItems(distributions);
-        //      distributionsComboBox.getSelectionModel().selectFirst();
+    }
 
+    private void textFieldInit(BooleanProperty property, TextField field, DoubleStringConverter converter) {
+        field.disableProperty().bind(property.not());
+        field.setTextFormatter(new TextFormatter<>(converter));
     }
 
     public void onCalculateAction() {
-        if (valuesCountInput.getText() != null) {
-            int coutnInputValues = Integer.parseInt(valuesCountInput.getText());
-            if ((rangeFromInput.getText() != null) && (rangeToInput.getText() != null)) {
-                double rangeFromInputDouble = Double.parseDouble(rangeFromInput.getText());
-                double rangeToInputDouble = Double.parseDouble(rangeToInput.getText());
-                tableOfPoints.getItems().clear();
-                double step = (rangeToInputDouble - rangeFromInputDouble) / coutnInputValues;
-                Random r = new Random();
-                for (int i = 0; i < coutnInputValues; i++) {
-                    double mx = rangeFromInputDouble + i * step + step / 2;
-                    double dx = step / 2;
-                    tableOfPoints.getItems().add(new TablePoint(((r.nextDouble() + r.nextDouble() + r.nextDouble() + r.nextDouble() + r.nextDouble() + r.nextDouble()) / 6 * dx + mx)));
-                }
+        Integer valuesCount = (Integer) fieldValuesCount.getTextFormatter().getValue();
+        Double rangeFrom = (Double) fieldRangeFrom.getTextFormatter().getValue();
+        Double rangeTo = (Double) fieldRangeTo.getTextFormatter().getValue();
+        Double innerRangeFrom = (Double) fieldInnerRangeFrom.getTextFormatter().getValue();
+        Double innerRangeTo = (Double) fieldInnerRangeTo.getTextFormatter().getValue();
+        Double mx = (Double) fieldMX.getTextFormatter().getValue();
+        Double dx = (Double) fieldDX.getTextFormatter().getValue();
+        if (valuesCount == null
+                || (radioParamsMethod.isSelected() && (mx == null || dx == null))
+                || (checkInnerRange.isSelected() && (innerRangeFrom == null || innerRangeTo == null))
+                || (radioRangeMethod.isSelected() && (rangeFrom == null || rangeTo == null))) {
+            return;
+        }
+        clear();
+        if (radioRangeMethod.isSelected()) {
+            mx = (rangeTo + rangeFrom) / 2;
+            dx = (rangeTo - mx) / 3;
+        }
+        lastMXValue = mx;
+        int j = 10000000;
+        for (int i = 0; i < valuesCount && j > 0; --j) {
+            double value = random.nextGaussian() * Math.sqrt(dx) + mx;
+            if (checkInnerRange.isSelected() && (value < innerRangeFrom || value > innerRangeTo)) {
+                continue;
             }
+            tableOfPoints.getItems().add(new TablePoint(value));
+            ++i;
         }
     }
 
@@ -112,14 +141,28 @@ public class MainController {
             point.setVerified(isVerified);
         }
         tableOfPoints.refresh();
+        double[] pointsArray = toPrimitiveArray(points.stream().filter(TablePoint::isVerified).map(TablePoint::getDoubleValue).toArray(Double[]::new));
+        if (pointsArray.length < 2) {
+            return;
+        }
+        tCriteria.setText(String.format("%.3f", TestUtils.tTest(lastMXValue, pointsArray)));
+    }
+
+    private double[] toPrimitiveArray(Double[] doubles) {
+        double[] array = new double[doubles.length];
+        for (int i = 0; i < doubles.length; i++) {
+            array[i] = doubles[i];
+        }
+        return array;
     }
 
     public void addPoint() {
-        tableOfPoints.getItems().add(new TablePoint(Double.parseDouble(addText.getText())));
+        tableOfPoints.getItems().add(new TablePoint(Double.parseDouble(fieldAddText.getText())));
     }
 
     public void clear() {
         tableOfPoints.getItems().clear();
+        tCriteria.setText("");
     }
 
     private double calculateMX(List<TablePoint> points, TablePoint excluded) {

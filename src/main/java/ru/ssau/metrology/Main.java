@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Main.class.getResource("/fxml/Main.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/Main.fxml"));
         primaryStage.setTitle("Метрология");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

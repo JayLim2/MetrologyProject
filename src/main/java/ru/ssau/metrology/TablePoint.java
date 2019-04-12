@@ -1,4 +1,4 @@
-package ru.ssau.metrology.view;
+package ru.ssau.metrology;
 
 public class TablePoint {
     private double value;
@@ -27,6 +27,10 @@ public class TablePoint {
             return "Не определено";
         }
         return isVerified ? "Подходит" : "Не подходит";
+    }
+
+    public boolean isVerified() {
+        return isVerified != null && isVerified;
     }
 
     public void setVerified(Boolean verified) {
